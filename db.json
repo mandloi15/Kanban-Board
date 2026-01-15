@@ -1,0 +1,139 @@
+{
+  "columns": [
+    {
+      "id": "1",
+      "title": "Todo",
+      "order": 0
+    },
+    {
+      "id": "2",
+      "title": "In Progress",
+      "order": 1
+    },
+    {
+      "id": "3",
+      "title": "Done",
+      "order": 2
+    }
+  ],
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Design landing page",
+      "description": "Create mockups and wireframes for the main landing page",
+      "priority": "high",
+      "dueDate": "2026-01-20",
+      "assignee": "Sarah",
+      "tags": [
+        "design",
+        "ui"
+      ],
+      "columnId": 1,
+      "order": 0
+    },
+    {
+      "id": "2",
+      "title": "Setup database",
+      "description": "Configure PostgreSQL and run initial migrations",
+      "priority": "high",
+      "dueDate": "2026-01-18",
+      "assignee": "John",
+      "tags": [
+        "backend",
+        "database"
+      ],
+      "columnId": 2,
+      "order": 0
+    },
+    {
+      "id": "3",
+      "title": "API documentation",
+      "description": "Write comprehensive API docs for all endpoints",
+      "priority": "medium",
+      "dueDate": "2026-01-25",
+      "assignee": "Mike",
+      "tags": [
+        "documentation"
+      ],
+      "columnId": 1,
+      "order": 1
+    },
+    {
+      "id": "4",
+      "title": "User authentication",
+      "description": "Implement JWT-based authentication system",
+      "priority": "high",
+      "dueDate": "2026-01-22",
+      "assignee": "John",
+      "tags": [
+        "backend",
+        "security"
+      ],
+      "columnId": 2,
+      "order": 1
+    },
+    {
+      "id": "5",
+      "title": "Write unit tests",
+      "description": "Add unit tests for critical functions",
+      "priority": "medium",
+      "dueDate": "2026-01-28",
+      "assignee": "Alex",
+      "tags": [
+        "testing",
+        "qa"
+      ],
+      "columnId": 3,
+      "order": 0
+    },
+    {
+      "id": "6",
+      "title": "Deploy to staging",
+      "description": "Setup CI/CD pipeline and deploy to staging environment",
+      "priority": "medium",
+      "dueDate": "2026-01-30",
+      "assignee": "David",
+      "tags": [
+        "devops",
+        "deployment"
+      ],
+      "columnId": 3,
+      "order": 1
+    },
+    {
+      "id": "7",
+      "title": "User feedback review",
+      "description": "Collect and analyze feedback from beta users",
+      "priority": "low",
+      "dueDate": "2026-02-05",
+      "assignee": "Sarah",
+      "tags": [
+        "ux-research"
+      ],
+      "columnId": 1,
+      "order": 2
+    }
+  ],
+  "activity": [
+    {
+      "id": "1",
+      "message": "Task \"Design landing page\" added to Todo",
+      "time": "2026-01-15T10:30:00Z"
+    },
+    {
+      "id": "2",
+      "message": "Column renamed to \"In Progress\"",
+      "time": "2026-01-15T10:25:00Z"
+    },
+    {
+      "id": "3",
+      "message": "Updated task: Setup database",
+      "time": "2026-01-15T10:20:00Z"
+    },
+    {
+      "id": "00b7",
+      "message": "Column \"harsh\" deleted",
+      "time": "2026-01-15T03:30:30.036Z"
+    }
+  ]
+}
