@@ -89,6 +89,12 @@ const boardReducer = (state, action) => {
         selectedTasks: []
       };
 
+    case "ADD_ACTIVITY":
+      return {
+        ...state,
+        activity: [action.payload, ...state.activity]
+      };
+
     case "SET_AUTH":
       return {
         ...state,

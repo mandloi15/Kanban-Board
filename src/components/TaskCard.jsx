@@ -32,10 +32,13 @@ function TaskCard({ task }) {
     const updated = await updateTask(task.id, { ...task, ...data });
     dispatch({ type: "UPDATE_TASK", payload: updated });
 
-    await logActivity({
+    const activityItem = {
+      id: Date.now().toString(),
       message: `Updated task: ${task.title}`,
       time: new Date().toISOString()
-    });
+    };
+    dispatch({ type: "ADD_ACTIVITY", payload: activityItem });
+    logActivity(activityItem);
 
     setOpen(false);
   };
@@ -54,10 +57,13 @@ function TaskCard({ task }) {
       
       dispatch({ type: "DELETE_TASK", payload: task.id });
 
-      await logActivity({
+      const activityItem = {
+        id: Date.now().toString(),
         message: `Deleted task: ${task.title}`,
         time: new Date().toISOString()
-      });
+      };
+      dispatch({ type: "ADD_ACTIVITY", payload: activityItem });
+      logActivity(activityItem);
     } catch (err) {
       console.error("❌ Delete failed:", err);
       alert("Failed to delete task: " + err.message);
@@ -86,18 +92,13 @@ function TaskCard({ task }) {
           }
         `}
       >
-        {/* Header with Checkbox */}
+        {/* Header */}
         <div className="flex items-start gap-3">
-          <input
-            type="checkbox"
-            checked={isSelected}
-            onChange={toggleSelect}
-            className="w-5 h-5 mt-0.5 text-blue-600 rounded cursor-pointer accent-blue-600 hover:bg-blue-50"
-          />
           <div className="flex-1 min-w-0">
             <h4
               className="font-bold text-gray-900 truncate hover:text-blue-600 cursor-pointer transition-colors text-sm leading-snug"
-              onClick={() => setOpen(true)}
+              onClick={(e) => { e.stopPropagation(); setOpen(true); }}
+              onPointerDown={(e) => e.stopPropagation()}
               title={task.title}
             >
               {task.title}
@@ -162,14 +163,16 @@ function TaskCard({ task }) {
         {/* Action Buttons */}
         <div className="flex items-center justify-between pt-2 border-t border-gray-100 opacity-0 group-hover:opacity-100 transition-opacity">
           <button
-            onClick={() => setOpen(true)}
+            onClick={(e) => { e.stopPropagation(); setOpen(true); }}
+            onPointerDown={(e) => e.stopPropagation()}
             className="text-xs text-blue-600 hover:text-blue-700 font-bold hover:bg-blue-50 px-2 py-1 rounded transition-colors"
           >
             Edit
           </button>
           {isAdmin(state.auth) && (
             <button
-              onClick={handleDelete}
+              onClick={(e) => { e.stopPropagation(); handleDelete(); }}
+              onPointerDown={(e) => e.stopPropagation()}
               className="text-xs text-red-600 hover:text-red-700 font-bold hover:bg-red-50 px-2 py-1 rounded transition-colors"
             >
               Delete

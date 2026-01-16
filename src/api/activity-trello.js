@@ -14,7 +14,9 @@ const MOCK_BASE_URL = "http://localhost:5000/activity";
 export const getActivity = async () => {
   if (isTrelloEnabled()) {
     try {
-      const url = withAuth(`${TRELLO_CONFIG.baseUrl}/boards/${TRELLO_CONFIG.boardId}/actions?limit=20`);
+      // Only fetch activities from the last hour to keep it clean
+      const since = new Date(Date.now() - 60 * 60 * 1000).toISOString();
+      const url = withAuth(`${TRELLO_CONFIG.baseUrl}/boards/${TRELLO_CONFIG.boardId}/actions?limit=10&since=${since}`);
       const res = await axios.get(url);
       
       // Map Trello actions to your activity structure

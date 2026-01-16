@@ -3,6 +3,7 @@ import { BoardContext } from "../context/BoardContext";
 import Column from "./Column";
 import ColumnModal from "./ColumnModal";
 import { addColumn, updateColumn } from "../api/columns-trello";
+import { logActivity } from "../api/activity-trello";
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import {
   SortableContext,
@@ -32,6 +33,15 @@ function ColumnList() {
       order: state.columns.length
     });
     dispatch({ type: "ADD_COLUMN", payload: column });
+
+    const activityItem = {
+      id: Date.now().toString(),
+      message: `Column "${title}" created`,
+      time: new Date().toISOString()
+    };
+    dispatch({ type: "ADD_ACTIVITY", payload: activityItem });
+    logActivity(activityItem);
+
     setOpen(false);
   };
 

@@ -58,10 +58,13 @@ function Column({ column, filters }) {
       dispatch({ type: "ADD_TASK", payload: createdTask });
 
       console.log("📝 Step 6: Logging activity");
-      await logActivity({
+      const activityItem = {
+        id: Date.now().toString(),
         message: `Task "${createdTask.title}" added to ${column.title}`,
         time: new Date().toISOString()
-      });
+      };
+      dispatch({ type: "ADD_ACTIVITY", payload: activityItem });
+      logActivity(activityItem);
 
       console.log("✅ Step 7: Success! UI will re-render with new task");
       console.log("💾 Step 8: On page refresh, task persists via json-server");
@@ -85,10 +88,13 @@ function Column({ column, filters }) {
 
     dispatch({ type: "UPDATE_COLUMN", payload: updated });
 
-    await logActivity({
+    const activityItem = {
+      id: Date.now().toString(),
       message: `Column renamed to "${title}"`,
       time: new Date().toISOString()
-    });
+    };
+    dispatch({ type: "ADD_ACTIVITY", payload: activityItem });
+    logActivity(activityItem);
 
     setEditOpen(false);
   };
@@ -103,10 +109,13 @@ function Column({ column, filters }) {
       payload: { columnId: column.id }
     });
 
-    await logActivity({
+    const activityItem = {
+      id: Date.now().toString(),
       message: `Column "${column.title}" deleted`,
       time: new Date().toISOString()
-    });
+    };
+    dispatch({ type: "ADD_ACTIVITY", payload: activityItem });
+    logActivity(activityItem);
   };
 
   return (
@@ -130,7 +139,8 @@ function Column({ column, filters }) {
           
           <h3
             className="font-bold text-gray-900 flex-1 cursor-pointer hover:text-blue-600 transition-colors truncate text-base"
-            onClick={() => setEditOpen(true)}
+            onClick={(e) => { e.stopPropagation(); setEditOpen(true); }}
+            onPointerDown={(e) => e.stopPropagation()}
             title={column.title}
           >
             {column.title}
@@ -144,7 +154,8 @@ function Column({ column, filters }) {
 
         {isAdmin(state.auth) && (
           <button
-            onClick={handleDeleteColumn}
+            onClick={(e) => { e.stopPropagation(); handleDeleteColumn(); }}
+            onPointerDown={(e) => e.stopPropagation()}
             className="ml-2 opacity-0 group-hover:opacity-100 text-gray-400 hover:text-red-600 transition-all p-1 hover:bg-red-50 rounded"
             title="Delete column"
           >
@@ -158,7 +169,8 @@ function Column({ column, filters }) {
         <div className="mx-4 mt-4 p-3 bg-red-50 border-2 border-red-200 rounded-lg">
           <p className="text-sm text-red-700 font-semibold">⚠️ {error}</p>
           <button
-            onClick={() => setError(null)}
+            onClick={(e) => { e.stopPropagation(); setError(null); }}
+            onPointerDown={(e) => e.stopPropagation()}
             className="text-xs text-red-600 mt-1 hover:underline font-semibold"
           >
             Dismiss
@@ -182,7 +194,8 @@ function Column({ column, filters }) {
       {/* Add Task Button */}
       <div className="p-4 border-t border-gray-200 bg-white rounded-b-2xl">
         <button
-          onClick={() => setTaskOpen(true)}
+          onClick={(e) => { e.stopPropagation(); setTaskOpen(true); }}
+          onPointerDown={(e) => e.stopPropagation()}
           disabled={isLoading}
           className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200 text-sm font-semibold group disabled:opacity-50 disabled:cursor-not-allowed"
         >
