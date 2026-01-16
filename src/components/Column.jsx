@@ -3,9 +3,9 @@ import { BoardContext } from "../context/BoardContext";
 import TaskList from "./TaskList";
 import TaskModal from "./TaskModal";
 import ColumnModal from "./ColumnModal";
-import { addTask } from "../api/tasks";
-import { updateColumn, deleteColumn } from "../api/columns";
-import { logActivity } from "../api/activity";
+import { addTask } from "../api/tasks-trello";
+import { updateColumn, deleteColumn } from "../api/columns-trello";
+import { logActivity } from "../api/activity-trello";
 import { isAdmin } from "../utils/permissions";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
@@ -25,7 +25,7 @@ function Column({ column, filters }) {
     transition
   };
 
-  const columnTasks = state.tasks.filter(t => t.columnId === column.id);
+  const columnTasks = state.tasks.filter(t => t.columnId == column.id);
 
   const handleAddTask = async (formData) => {
     setError(null);
@@ -41,7 +41,7 @@ function Column({ column, filters }) {
         dueDate: formData.dueDate || null,
         assignee: formData.assignee || "",
         tags: formData.tags || [],
-        columnId: column.id,
+        columnId: column.id, // Keep as string for Trello List ID
         order: Date.now(),
         completed: false,
         createdAt: new Date().toISOString(),

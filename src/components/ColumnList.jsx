@@ -2,7 +2,7 @@ import { useContext, useMemo, useState } from "react";
 import { BoardContext } from "../context/BoardContext";
 import Column from "./Column";
 import ColumnModal from "./ColumnModal";
-import { addColumn, updateColumn } from "../api/columns";
+import { addColumn, updateColumn } from "../api/columns-trello";
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import {
   SortableContext,

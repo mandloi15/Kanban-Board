@@ -7,8 +7,8 @@ import {
   verticalListSortingStrategy,
   arrayMove
 } from "@dnd-kit/sortable";
-import { patchTask } from "../api/tasks";
-import { logActivity } from "../api/activity";
+import { patchTask } from "../api/tasks-trello";
+import { logActivity } from "../api/activity-trello";
 
 function TaskList({ columnId, filters }) {
   const { state, dispatch } = useContext(BoardContext);
@@ -16,7 +16,7 @@ function TaskList({ columnId, filters }) {
 
   const filteredTasks = useMemo(() => {
     return tasks
-      .filter(t => t.columnId === columnId)
+      .filter(t => t.columnId == columnId)
       .filter(t =>
         !filters?.search ||
         t.title.toLowerCase().includes(filters.search.toLowerCase()) ||

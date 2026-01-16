@@ -2,8 +2,8 @@ import React, { useContext, useState } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { BoardContext } from "../context/BoardContext";
-import { updateTask, deleteTask } from "../api/tasks";
-import { logActivity } from "../api/activity";
+import { updateTask, deleteTask } from "../api/tasks-trello";
+import { logActivity } from "../api/activity-trello";
 import TaskModal from "./TaskModal";
 import { isAdmin } from "../utils/permissions";
 
@@ -41,16 +41,27 @@ function TaskCard({ task }) {
   };
 
   const handleDelete = async () => {
-    if (!isAdmin(state.auth)) return;
+    if (!isAdmin(state.auth)) {
+      console.log("❌ Delete failed: Not admin");
+      return;
+    }
     if (!window.confirm("Delete this task?")) return;
 
-    await deleteTask(task.id);
-    dispatch({ type: "DELETE_TASK", payload: task.id });
+    try {
+      console.log("🗑️ Deleting task:", task.id);
+      await deleteTask(task.id);
+      console.log("✅ Task deleted from Trello");
+      
+      dispatch({ type: "DELETE_TASK", payload: task.id });
 
-    await logActivity({
-      message: `Deleted task: ${task.title}`,
-      time: new Date().toISOString()
-    });
+      await logActivity({
+        message: `Deleted task: ${task.title}`,
+        time: new Date().toISOString()
+      });
+    } catch (err) {
+      console.error("❌ Delete failed:", err);
+      alert("Failed to delete task: " + err.message);
+    }
   };
 
   const toggleSelect = () => {
