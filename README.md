@@ -1,8 +1,8 @@
-Kanban Board
+## Kanban Board
 
 A modern, interactive Kanban board application built with React, Vite, and Tailwind CSS. This project helps you visualize and manage tasks efficiently using the Kanban methodology.
 
-## 🚀 Features
+## Features
 
 - **Drag and Drop**: Seamlessly move tasks between columns
 - **Task Management**: Create, edit, and delete tasks with ease
@@ -11,7 +11,7 @@ A modern, interactive Kanban board application built with React, Vite, and Tailw
 - **Modern UI**: Clean interface built with Tailwind CSS
 - **Fast Development**: Powered by Vite for lightning-fast HMR (Hot Module Replacement)
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **React** - UI library for building the interface
 - **Vite** - Next-generation frontend build tool
@@ -19,13 +19,13 @@ A modern, interactive Kanban board application built with React, Vite, and Tailw
 - **JSON Server** - Mock REST API for data persistence
 - **ESLint** - Code quality and consistency
 
-## 📋 Prerequisites
+## Prerequisites
 
 Before you begin, ensure you have the following installed:
 - Node.js (version 14 or higher)
 - npm or yarn package manager
 
-## 🔧 Installation
+## Installation
 
 1. Clone the repository:
 ```bash
@@ -40,7 +40,7 @@ npm install
 yarn install
 ```
 
-## 🚀 Running the Application
+## Running the Application
 
 ### Development Mode
 
@@ -74,7 +74,7 @@ npm run preview
 yarn preview
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 Kanban-Board/
@@ -91,7 +91,7 @@ Kanban-Board/
 └── README.md            # Project documentation
 ```
 
-## 📚 Documentation
+## Documentation
 
 Additional documentation files in this repository:
 
@@ -102,14 +102,14 @@ Additional documentation files in this repository:
 - **README_ADD_TASK_FLOW.md** - Extended documentation on task management
 - **TESTING_SCENARIOS.md** - Test cases and scenarios
 
-## 🎯 Usage
+## Usage
 
 1. **Creating Tasks**: Click the "Add Task" button to create a new task
 2. **Moving Tasks**: Drag and drop tasks between columns (To Do, In Progress, Done)
 3. **Editing Tasks**: Click on a task to edit its details
 4. **Deleting Tasks**: Use the delete button on each task card
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request. For major changes:
 
@@ -119,27 +119,27 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 🐛 Known Issues
+## Known Issues
 
 Please refer to the [Issues](https://github.com/mandloi15/Kanban-Board/issues) page for current bugs and feature requests.
 
-## 📝 License
+## License
 
 This project is open source and available under the [MIT License](LICENSE).
 
-## 👨‍💻 Author
+## Author
 
 **mandloi15**
 - GitHub: [@mandloi15](https://github.com/mandloi15)
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - React team for the amazing library
 - Vite team for the blazing-fast build tool
 - Tailwind CSS for the utility-first framework
 - The open-source community for inspiration and resources
 
-## 📧 Support
+## Support
 
 If you have any questions or need help, please:
 - Open an issue on GitHub
@@ -148,4 +148,4 @@ If you have any questions or need help, please:
 
 ---
 
-⭐ If you find this project useful, please consider giving it a star on GitHub!
+If you find this project useful, please consider giving it a star on GitHub!
