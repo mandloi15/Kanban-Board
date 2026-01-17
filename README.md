@@ -1,4 +1,4 @@
-# Kanban Board
+Kanban Board
 
 A modern, interactive Kanban board application built with React, Vite, and Tailwind CSS. This project helps you visualize and manage tasks efficiently using the Kanban methodology.
 
