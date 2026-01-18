@@ -1,4 +1,4 @@
-# ⭐ FULL ADD TASK FLOW - INTERVIEW READY
+# FULL ADD TASK FLOW - INTERVIEW READY
 
 ## Overview
 This document explains the complete add task flow from user interaction to persistence, designed for technical interviews.
@@ -75,11 +75,11 @@ const validateForm = () => {
 ```
 
 **Validations:**
-✅ Title is required, 3-100 characters  
-✅ Description max 500 characters  
-✅ Due date cannot be in past  
-✅ Max 5 tags allowed  
-✅ Assignee name max 50 chars  
+Title is required, 3-100 characters  
+Description max 500 characters  
+Due date cannot be in past  
+Max 5 tags allowed  
+Assignee name max 50 chars  
 
 **User Feedback:**
 - Real-time validation as user types
@@ -122,7 +122,7 @@ const handleSubmit = async (e) => {
 ```javascript
 const handleAddTask = async (formData) => {
   try {
-    console.log("📤 Step 1: User submitted form data:", formData);
+    console.log("Step 1: User submitted form data:", formData);
 
     // Prepare complete payload
     const taskPayload = {
@@ -139,12 +139,12 @@ const handleAddTask = async (formData) => {
       updatedAt: new Date().toISOString()
     };
 
-    console.log("📋 Step 2: Prepared payload:", taskPayload);
+    console.log("Step 2: Prepared payload:", taskPayload);
 
     // Step 3: POST to backend
-    console.log(`📤 Step 3: Sending POST /tasks request...`);
+    console.log(`Step 3: Sending POST /tasks request...`);
     const createdTask = await addTask(taskPayload);
-    console.log("📥 Step 4: Backend response:", createdTask);
+    console.log("Step 4: Backend response:", createdTask);
 ```
 
 ---
@@ -230,11 +230,11 @@ case "ADD_TASK":
 - `TaskCard.jsx` - displays task with all properties
 
 **Visual Feedback:**
-✅ Loading spinner shows during save  
-✅ Modal closes automatically  
-✅ New task appears in column  
-✅ Task count badge updates (5 → 6)  
-✅ Activity log shows new entry
+Loading spinner shows during save  
+Modal closes automatically  
+New task appears in column  
+Task count badge updates (5 → 6)  
+Activity log shows new entry
 
 ---
 
@@ -312,7 +312,7 @@ try {
   const createdTask = await addTask(taskPayload);
   // Success path
 } catch (err) {
-  console.error("❌ Error in add task flow:", err);
+  console.error("Error in add task flow:", err);
   setError(err.message || "Failed to create task...");
   setIsLoading(false);
 }
@@ -340,14 +340,14 @@ Error alert shows in modal with retry capability.
 
 ## INTERVIEW TALKING POINTS
 
-✅ **Complete Data Flow:** UI → API → Backend → State → UI  
-✅ **Validation:** Frontend catches errors before backend  
-✅ **Error Handling:** Try-catch with user-friendly messages  
-✅ **Loading States:** UX feedback during async operations  
-✅ **Persistence:** JSON Server watches file for changes  
-✅ **State Management:** Context API + useReducer pattern  
-✅ **User Feedback:** Real-time validation, activity logging  
-✅ **Code Organization:** Separation of concerns (UI/API/State)  
+**Complete Data Flow:** UI → API → Backend → State → UI  
+**Validation:** Frontend catches errors before backend  
+**Error Handling:** Try-catch with user-friendly messages  
+**Loading States:** UX feedback during async operations  
+**Persistence:** JSON Server watches file for changes  
+**State Management:** Context API + useReducer pattern  
+**User Feedback:** Real-time validation, activity logging  
+**Code Organization:** Separation of concerns (UI/API/State)  
 
 ---
 
@@ -366,14 +366,14 @@ Error alert shows in modal with retry capability.
 ### Console Logs
 Open DevTools Console to see step-by-step execution:
 ```
-📤 Step 1: User submitted form data: {...}
-📋 Step 2: Prepared payload: {...}
-📤 Step 3: Sending POST /tasks request...
-📥 Step 4: Backend response: {...}
-🔄 Step 5: Dispatching ADD_TASK to update global state
-📝 Step 6: Logging activity
-✅ Step 7: Success! UI will re-render with new task
-💾 Step 8: On page refresh, task persists via json-server
+Step 1: User submitted form data: {...}
+Step 2: Prepared payload: {...}
+Step 3: Sending POST /tasks request...
+Step 4: Backend response: {...}
+Step 5: Dispatching ADD_TASK to update global state
+Step 6: Logging activity
+Step 7: Success! UI will re-render with new task
+Step 8: On page refresh, task persists via json-server
 ```
 
 ### Check db.json
