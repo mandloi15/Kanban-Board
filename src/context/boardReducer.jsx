@@ -95,6 +95,16 @@ const boardReducer = (state, action) => {
         activity: [action.payload, ...state.activity]
       };
 
+    case "MOVE_TASK":
+      return {
+        ...state,
+        tasks: state.tasks.map(task =>
+          task.id === action.payload.taskId
+            ? { ...task, columnId: action.payload.targetColumnId }
+            : task
+        )
+      };
+
     case "SET_AUTH":
       return {
         ...state,

@@ -1,18 +1,24 @@
 import { useContext, useMemo } from "react";
 import { BoardContext } from "../context/BoardContext";
 import TaskCard from "./TaskCard";
-import { DndContext, closestCenter } from "@dnd-kit/core";
 import {
   SortableContext,
-  verticalListSortingStrategy,
-  arrayMove
+  verticalListSortingStrategy
 } from "@dnd-kit/sortable";
-import { patchTask } from "../api/tasks-trello";
-import { logActivity } from "../api/activity-trello";
+import { useDroppable } from "@dnd-kit/core";
 
 function TaskList({ columnId, filters }) {
-  const { state, dispatch } = useContext(BoardContext);
+  const { state } = useContext(BoardContext);
   const { tasks } = state;
+
+  // Make the column a droppable area for tasks
+  const { setNodeRef, isOver } = useDroppable({
+    id: `column-drop-${columnId}`,
+    data: {
+      type: "column",
+      columnId
+    }
+  });
 
   const filteredTasks = useMemo(() => {
     return tasks
@@ -39,37 +45,13 @@ function TaskList({ columnId, filters }) {
       });
   }, [tasks, columnId, filters]);
 
-  const handleDragEnd = async (event) => {
-    const { active, over } = event;
-    if (!over || active.id === over.id) return;
-
-    const oldIndex = filteredTasks.findIndex(t => t.id === active.id);
-    const newIndex = filteredTasks.findIndex(t => t.id === over.id);
-
-    const reordered = arrayMove(filteredTasks, oldIndex, newIndex);
-
-    const updatedTasks = [...tasks];
-
-    for (let i = 0; i < reordered.length; i++) {
-      const updated = await patchTask(reordered[i].id, {
-        order: i,
-        columnId
-      });
-
-      const index = updatedTasks.findIndex(t => t.id === updated.id);
-      updatedTasks[index] = updated;
-    }
-
-    dispatch({ type: "SET_TASKS", payload: updatedTasks });
-
-    await logActivity({
-      message: "Reordered tasks",
-      time: new Date().toISOString()
-    });
-  };
-
   return (
-    <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+    <div
+      ref={setNodeRef}
+      className={`min-h-[100px] transition-colors duration-200 rounded-lg p-2 space-y-3 ${
+        isOver ? "bg-blue-50 ring-2 ring-blue-300 ring-inset" : ""
+      }`}
+    >
       <SortableContext
         items={filteredTasks.map(t => t.id)}
         strategy={verticalListSortingStrategy}
@@ -78,7 +60,12 @@ function TaskList({ columnId, filters }) {
           <TaskCard key={task.id} task={task} />
         ))}
       </SortableContext>
-    </DndContext>
+      {filteredTasks.length === 0 && (
+        <div className={`p-4 text-center text-gray-400 text-sm ${isOver ? "text-blue-500" : ""}`}>
+          {isOver ? "Drop task here" : "No tasks"}
+        </div>
+      )}
+    </div>
   );
 }
 
